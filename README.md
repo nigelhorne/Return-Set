@@ -16,11 +16,14 @@ Version 0.01
 
 # DESCRIPTION
 
-Exports a single function, `set_return`, which returns a given value. If a
-validation schema is provided, the value is validated using
-[Params::Validate::Strict](https://metacpan.org/pod/Params%3A%3AValidate%3A%3AStrict). If validation fails, it croaks.
+Exports a single function, `set_return`, which returns a given value.
+If a validation schema is provided, the value is validated using
+[Params::Validate::Strict](https://metacpan.org/pod/Params%3A%3AValidate%3A%3AStrict).
+If validation fails, it croaks.
 
-# FUNCTIONS
+When used hand-in-hand with [Params::Get](https://metacpan.org/pod/Params%3A%3AGet) you should be able to formally specify the input and output sets for a method.
+
+# METHODS
 
 ## set\_return($value, $schema)
 
@@ -30,6 +33,11 @@ Croaks if validation fails.
 # AUTHOR
 
 Nigel Horne, `<njh at nigelhorne.com>`
+
+# SEE ALSO
+
+- [Params::Validate::Strict](https://metacpan.org/pod/Params%3A%3AValidate%3A%3AStrict)
+- [Params::Get](https://metacpan.org/pod/Params%3A%3AGet)
 
 # SUPPORT
 

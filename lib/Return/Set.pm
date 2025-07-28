@@ -33,11 +33,14 @@ our $VERSION = '0.01';
 
 =head1 DESCRIPTION
 
-Exports a single function, C<set_return>, which returns a given value. If a
-validation schema is provided, the value is validated using
-L<Params::Validate::Strict>. If validation fails, it croaks.
+Exports a single function, C<set_return>, which returns a given value.
+If a validation schema is provided, the value is validated using
+L<Params::Validate::Strict>.
+If validation fails, it croaks.
 
-=head1 FUNCTIONS
+When used hand-in-hand with L<Params::Get> you should be able to formally specify the input and output sets for a method.
+
+=head1	METHODS
 
 =head2 set_return($value, $schema)
 
@@ -66,12 +69,22 @@ sub set_return {
 		} or croak "Validation failed: $@";
 	}
 
-    return $value;
+	return $value;
 }
 
 =head1 AUTHOR
 
 Nigel Horne, C<< <njh at nigelhorne.com> >>
+
+=head1 SEE ALSO
+
+=over 4
+
+=item * L<Params::Validate::Strict>
+
+=item * L<Params::Get>
+
+=back
 
 =head1 SUPPORT
 
