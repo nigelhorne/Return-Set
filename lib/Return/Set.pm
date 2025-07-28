@@ -8,7 +8,7 @@ use Carp qw(croak);
 use Params::Get;
 use Params::Validate::Strict qw(validate_strict);
 
-our @EXPORT_OK = qw(set);
+our @EXPORT_OK = qw(set_return);
 our $VERSION   = '0.06';
 
 =head1 NAME
@@ -17,33 +17,33 @@ Return::Set - Return a value optionally validated against a strict schema
 
 =head1 SYNOPSIS
 
-    use Return::Set qw(set);
+    use Return::Set qw(set_return);
 
-    my $value = set($value);  # Just returns $value
+    my $value = set_return($value);  # Just returns $value
 
-    my $value = set($value, { type => 'integer' });  # Validates $value is an integer
+    my $value = set_return($value, { type => 'integer' });  # Validates $value is an integer
 
 =head1 DESCRIPTION
 
-Exports a single function, C<set>, which returns a given value. If a
+Exports a single function, C<set_return>, which returns a given value. If a
 validation schema is provided, the value is validated using
 L<Params::Validate::Strict>. If validation fails, it croaks.
 
 =head1 FUNCTIONS
 
-=head2 set($value, $schema)
+=head2 set_return($value, $schema)
 
 Returns C<$value>. If C<$schema> is provided, validates the value against it.
 Croaks if validation fails.
 
 =cut
 
-sub set {
+sub set_return {
 	my $value;
 	my $schema;
 
 	if(scalar(@_) == 0) {
-		croak(__PACKAGE__, ': Usage: set(value, [ schema ])');
+		croak(__PACKAGE__, ': Usage: set_return(value, [ schema ])');
 	} elsif(scalar(@_) == 2) {
 		$value = $_[0];
 		$schema = $_[1];
