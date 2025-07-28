@@ -1,8 +1,8 @@
 use strict;
 use warnings;
-use Test::Most;
+
 use Return::Set qw(set);
-use Params::Validate qw(:types);
+use Test::Most;
 
 note('Test without schema - scalar');
 is(set('hello'), 'hello', 'Returns scalar without schema');
@@ -24,7 +24,7 @@ is_deeply(set($hash, { type => 'hashref', min => 1, max => 1 }), $hash, 'Passes 
 
 note('Test with scalar schema - invalid');
 throws_ok {
-    set([], { type => 'integer' });
+	set([], { type => 'integer' });
 } qr/Validation failed/, 'Fails validation with wrong type (expected SCALAR)';
 
 note('Test with coderef schema - valid');

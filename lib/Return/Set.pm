@@ -21,7 +21,7 @@ Return::Set - Return a value optionally validated against a strict schema
 
     my $value = set($value);  # Just returns $value
 
-    my $value = set($value, { type => SCALAR });  # Validates $value is a scalar
+    my $value = set($value, { type => 'integer' });  # Validates $value is an integer
 
 =head1 DESCRIPTION
 
