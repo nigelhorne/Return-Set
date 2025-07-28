@@ -44,7 +44,8 @@ When used hand-in-hand with L<Params::Get> you should be able to formally specif
 
 =head2 set_return($value, $schema)
 
-Returns C<$value>. If C<$schema> is provided, validates the value against it.
+Returns C<$value>.
+If C<$schema> is provided, validates the value against it.
 Croaks if validation fails.
 
 =cut
@@ -62,7 +63,7 @@ sub set_return {
 		$schema = $params->{'schema'};
 	}
 
-	if (defined $schema) {
+	if(defined $schema) {
 		eval {
 			validate_strict(args => { 'value' => $value }, schema => { 'value' => $schema });
 			1;
