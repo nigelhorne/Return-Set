@@ -2,23 +2,27 @@
 
 Return::Set - Return a value optionally validated against a strict schema
 
+# VERSION
+
+Version 0.01
+
 # SYNOPSIS
 
-    use Return::Set qw(set);
+    use Return::Set qw(set_return);
 
-    my $value = set($value);  # Just returns $value
+    my $value = set_return($value);  # Just returns $value
 
-    my $value = set($value, { type => 'integer' });  # Validates $value is an integer
+    my $value = set_return($value, { type => 'integer' });  # Validates $value is an integer
 
 # DESCRIPTION
 
-Exports a single function, `set`, which returns a given value. If a
+Exports a single function, `set_return`, which returns a given value. If a
 validation schema is provided, the value is validated using
 [Params::Validate::Strict](https://metacpan.org/pod/Params%3A%3AValidate%3A%3AStrict). If validation fails, it croaks.
 
 # FUNCTIONS
 
-## set($value, $schema)
+## set\_return($value, $schema)
 
 Returns `$value`. If `$schema` is provided, validates the value against it.
 Croaks if validation fails.

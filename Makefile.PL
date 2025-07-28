@@ -31,6 +31,7 @@ WriteMakefile(
 		'Test::Needs' => 0,
 	}, PREREQ_PM => {
 		'Carp' => 0,
+		'Exporter' => 0,
 		'Params::Get' => 0,
 		'Params::Validate::Strict' => 0.02,
 	}, dist => $dist,

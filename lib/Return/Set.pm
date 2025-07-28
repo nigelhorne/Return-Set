@@ -9,11 +9,18 @@ use Params::Get;
 use Params::Validate::Strict qw(validate_strict);
 
 our @EXPORT_OK = qw(set_return);
-our $VERSION   = '0.06';
 
 =head1 NAME
 
 Return::Set - Return a value optionally validated against a strict schema
+
+=head1 VERSION
+
+Version 0.01
+
+=cut
+
+our $VERSION = '0.01';
 
 =head1 SYNOPSIS
 
@@ -42,9 +49,7 @@ sub set_return {
 	my $value;
 	my $schema;
 
-	if(scalar(@_) == 0) {
-		croak(__PACKAGE__, ': Usage: set_return(value, [ schema ])');
-	} elsif(scalar(@_) == 2) {
+	if(scalar(@_) == 2) {
 		$value = $_[0];
 		$schema = $_[1];
 	} else {
@@ -53,12 +58,12 @@ sub set_return {
 		$schema = $params->{'schema'};
 	}
 
-    if (defined $schema) {
-        eval {
-            validate_strict(args => { 'value' => $value }, schema => { 'value' => $schema });
-            1;
-        } or croak "Validation failed: $@";
-    }
+	if (defined $schema) {
+		eval {
+			validate_strict(args => { 'value' => $value }, schema => { 'value' => $schema });
+			1;
+		} or croak "Validation failed: $@";
+	}
 
     return $value;
 }
