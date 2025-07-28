@@ -3,10 +3,11 @@ package Return::Set;
 use strict;
 use warnings;
 
-use Exporter 'import';
+use parent 'Exporter';
+
 use Carp qw(croak);
-use Params::Get;
-use Params::Validate::Strict qw(validate_strict);
+use Params::Get 0.04;
+use Params::Validate::Strict 0.02 qw(validate_strict);
 
 our @EXPORT_OK = qw(set_return);
 

@@ -12,17 +12,17 @@ if($^O eq 'darwin') {
 }
 
 WriteMakefile(
-	NAME		=> 'Return::Set',
-	AUTHOR		=> q{Nigel Horne <njh@nigelhorne.com>},
-	VERSION_FROM	=> 'lib/Return/Set.pm',
-	ABSTRACT_FROM	=> 'lib/Return/Set.pm',
+	NAME	 => 'Return::Set',
+	AUTHOR	 => q{Nigel Horne <njh@nigelhorne.com>},
+	VERSION_FROM => 'lib/Return/Set.pm',
+	ABSTRACT_FROM => 'lib/Return/Set.pm',
 	((defined($ExtUtils::MakeMaker::VERSION) && ($ExtUtils::MakeMaker::VERSION >= 6.3002))
 		? ('LICENSE'=> 'GPL')
 		: ()),
 	'LIBS' => [''],	# e.g., '-lm'
 	'DEFINE' => '',	# e.g., '-DHAVE_SOMETHING'
 	'INC' => '',	# e.g., '-I/usr/include/other'
-	PL_FILES	=> {},
+	PL_FILES => {},
 	CONFIGURE_REQUIRES => {
 		'ExtUtils::MakeMaker' => 6.64,	# Minimum version for TEST_REQUIRES
 	}, TEST_REQUIRES => {
@@ -32,10 +32,10 @@ WriteMakefile(
 	}, PREREQ_PM => {
 		'Carp' => 0,
 		'Exporter' => 0,
-		'Params::Get' => 0,
+		'Params::Get' => 0.04,
 		'Params::Validate::Strict' => 0.02,
 	}, dist => $dist,
-	clean		=> { FILES => 'Return-Set-*' },
+	clean => { FILES => 'Return-Set-*' },
 	# META_ADD => {
 		# provides => {}
 	# },
@@ -57,5 +57,5 @@ WriteMakefile(
 			}
 		},
 	},
-	MIN_PERL_VERSION	=> '5.008'
+	MIN_PERL_VERSION => '5.008'
 );
