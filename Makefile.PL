@@ -32,8 +32,8 @@ WriteMakefile(
 	}, PREREQ_PM => {
 		'Carp' => 0,
 		'Exporter' => 0,
-		'Params::Get' => 0.04,
-		'Params::Validate::Strict' => 0.02,
+		'Params::Get' => 0.11,
+		'Params::Validate::Strict' => 0.04,
 	}, dist => $dist,
 	clean => { FILES => 'Return-Set-*' },
 	# META_ADD => {
