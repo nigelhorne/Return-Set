@@ -1,8 +1,9 @@
 use strict;
 use warnings;
 
-use Return::Set qw(set_return);
 use Test::Most;
+
+BEGIN { use_ok('Return::Set', qw(set_return)) }
 
 note('Test without schema - scalar');
 is(set_return('hello'), 'hello', 'Returns scalar without schema');

@@ -57,13 +57,15 @@ sub set_return {
 	if(scalar(@_) == 2) {
 		$value = $_[0];
 		$schema = $_[1];
+	} elsif(scalar(@_) == 0) {
+		die __PACKAGE__, ': Usage set(return($value, $schema))';
 	} else {
 		my $params = Params::Get::get_params('value', \@_);
 		$value = $params->{'value'};
 		$schema = $params->{'schema'};
 	}
 
-	if(defined $schema) {
+	if(defined($schema)) {
 		eval {
 			validate_strict(args => { 'value' => $value }, schema => { 'value' => $schema });
 			1;

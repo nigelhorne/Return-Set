@@ -1,5 +1,8 @@
 Revision history for Return-Set
 
+0.03
+	Explictly die when no arguments are given
+
 0.02	Mon Jul 28 20:42:49 EDT 2025
 	Fix the pre-req versions
 
