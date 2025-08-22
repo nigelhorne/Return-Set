@@ -7,7 +7,7 @@ use parent 'Exporter';
 
 use Carp qw(croak);
 use Params::Get 0.11;
-use Params::Validate::Strict 0.04 qw(validate_strict);
+use Params::Validate::Strict 0.10 qw(validate_strict);
 
 our @EXPORT_OK = qw(set_return);
 
