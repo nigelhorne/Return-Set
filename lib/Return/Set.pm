@@ -2,6 +2,7 @@ package Return::Set;
 
 use strict;
 use warnings;
+use 5.010;
 
 use parent 'Exporter';
 
@@ -45,7 +46,7 @@ When used hand-in-hand with L<Params::Get> you should be able to formally specif
 =head2 set_return($value, $schema)
 
 Returns C<$value>.
-If C<$schema> is provided, validates the value against it.
+If C<$schema> is provided, it validates the value against it.
 Croaks if validation fails.
 
 =cut
@@ -63,7 +64,7 @@ sub set_return {
 		return $_[0];
 	} else {
 		my $params = Params::Get::get_params('output', \@_);
-		$value = $params->{'value'} || $params->{'output'};
+		$value = $params->{'value'} // $params->{'output'};
 		$schema = $params->{'schema'};
 	}
 
