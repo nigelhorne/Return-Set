@@ -4,7 +4,7 @@ Return::Set - Return a value optionally validated against a strict schema
 
 # VERSION
 
-Version 0.02
+Version 0.03
 
 # SYNOPSIS
 
