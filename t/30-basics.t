@@ -15,6 +15,8 @@ is_deeply(set_return($array), $array, 'Returns arrayref without schema');
 note('Test with scalar schema - valid');
 is(set_return(123, { type => 'integer'}), 123, 'Passes scalar validation');
 
+is(set_return({ output => 123, schema => { type => 'integer'}}), 123, 'Takes output parameter');
+
 note('Test with arrayref schema - valid');
 my $list = [ 'a', 'b' ];
 is_deeply(set_return($list, { type => 'arrayref', min => 2, max => 2 }), $list, 'Passes ARRAYREF validation');

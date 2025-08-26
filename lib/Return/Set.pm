@@ -59,9 +59,11 @@ sub set_return {
 		$schema = $_[1];
 	} elsif(scalar(@_) == 0) {
 		die __PACKAGE__, ': Usage set(return($value, $schema))';
+	} elsif((scalar(@_) == 1) && !ref($_[0])) {
+		return $_[0];
 	} else {
-		my $params = Params::Get::get_params('value', \@_);
-		$value = $params->{'value'};
+		my $params = Params::Get::get_params('output', \@_);
+		$value = $params->{'value'} || $params->{'output'};
 		$schema = $params->{'schema'};
 	}
 
