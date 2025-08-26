@@ -7,7 +7,7 @@ use 5.010;
 use parent 'Exporter';
 
 use Carp qw(croak);
-use Params::Get 0.11;
+use Params::Get 0.13;
 use Params::Validate::Strict 0.10 qw(validate_strict);
 
 our @EXPORT_OK = qw(set_return);
@@ -18,11 +18,11 @@ Return::Set - Return a value optionally validated against a strict schema
 
 =head1 VERSION
 
-Version 0.02
+Version 0.03
 
 =cut
 
-our $VERSION = '0.02';
+our $VERSION = '0.03';
 
 =head1 SYNOPSIS
 

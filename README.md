@@ -28,7 +28,7 @@ When used hand-in-hand with [Params::Get](https://metacpan.org/pod/Params%3A%3AG
 ## set\_return($value, $schema)
 
 Returns `$value`.
-If `$schema` is provided, validates the value against it.
+If `$schema` is provided, it validates the value against it.
 Croaks if validation fails.
 
 # AUTHOR

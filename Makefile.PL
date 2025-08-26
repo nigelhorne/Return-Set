@@ -19,10 +19,6 @@ WriteMakefile(
 	((defined($ExtUtils::MakeMaker::VERSION) && ($ExtUtils::MakeMaker::VERSION >= 6.3002))
 		? ('LICENSE'=> 'GPL')
 		: ()),
-	'LIBS' => [''],	# e.g., '-lm'
-	'DEFINE' => '',	# e.g., '-DHAVE_SOMETHING'
-	'INC' => '',	# e.g., '-I/usr/include/other'
-	PL_FILES => {},
 	CONFIGURE_REQUIRES => {
 		'ExtUtils::MakeMaker' => 6.64,	# Minimum version for TEST_REQUIRES
 	}, TEST_REQUIRES => {
@@ -32,7 +28,7 @@ WriteMakefile(
 	}, PREREQ_PM => {
 		'Carp' => 0,
 		'Exporter' => 0,
-		'Params::Get' => 0.11,
+		'Params::Get' => 0.13,
 		'Params::Validate::Strict' => 0.10,
 	}, dist => $dist,
 	clean => { FILES => 'Return-Set-*' },
@@ -51,9 +47,10 @@ WriteMakefile(
 				# license => 'http://dev.perl.org/licenses/',
 			}, bugtracker => {
 				mailto => 'bug-Return-Set@rt.cpan.org',
-				url => 'https://github.com/nigelhorne/Return-Set/issues',
-				# web => 'https://rt.cpan.org/Public/Dist/Display.html?Name=Return-Set',
-				web => 'https://github.com/nigelhorne/Return-Set/issues'
+				url => 'https://rt.cpan.org/Public/Dist/Display.html?Name=Return-Set',
+				web => 'https://rt.cpan.org/Public/Dist/Display.html?Name=Return-Set',
+				# url => 'https://github.com/nigelhorne/Return-Set/issues',
+				# web => 'https://github.com/nigelhorne/Return-Set/issues'
 			}
 		},
 	},
