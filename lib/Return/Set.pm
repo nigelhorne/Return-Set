@@ -56,7 +56,7 @@ sub set_return {
 	my $schema;
 
 	if((scalar(@_) == 1) && !ref($_[0])) {
-		return $_[0];
+		return $_[0];	 # Simple scalar case with no schema, so no validation is possible
 	}
 
 	if(scalar(@_) == 2) {
@@ -72,7 +72,15 @@ sub set_return {
 		eval {
 			validate_strict(args => { 'value' => $value }, schema => { 'value' => $schema });
 			1;
-		} or croak "Validation failed: $@";
+		} or do {
+			if(!defined($value)) {
+				croak "Validation failed, value is undefined: $@";
+			}
+			if(!ref($value)) {
+				croak "Validation failed, $value is invalid: $@";
+			}
+			croak "Validation failed: $@";
+		}
 	}
 
 	return $value;

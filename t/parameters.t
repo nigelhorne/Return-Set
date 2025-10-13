@@ -23,7 +23,7 @@ is set_return("hello"), "hello", "Basic scalar return works";
 is set_return(123, { type => 'integer' }), 123, "Integer validated successfully";
 
 # Validation failure
-throws_ok { set_return("not-an-int", { type => 'integer' }) }
+throws_ok { set_return('not-an-int', { type => 'integer' }) }
     qr/Validation failed/,
     "Validation fails with non-integer input";
 
