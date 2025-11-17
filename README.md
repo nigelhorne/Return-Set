@@ -10,18 +10,19 @@ Version 0.03
 
     use Return::Set qw(set_return);
 
-    my $value = set_return($value);  # Just returns $value
+    return set_return($value);  # Just returns $value
 
-    my $value = set_return($value, { type => 'integer' });  # Validates $value is an integer
+    return set_return($value, { type => 'integer' });  # Validates $value is an integer
 
 # DESCRIPTION
 
-Exports a single function, `set_return`, which returns a given value.
 If a validation schema is provided, the value is validated using
 [Params::Validate::Strict](https://metacpan.org/pod/Params%3A%3AValidate%3A%3AStrict).
 If validation fails, it croaks.
 
 When used hand-in-hand with [Params::Get](https://metacpan.org/pod/Params%3A%3AGet) you should be able to formally specify the input and output sets for a method.
+
+Exports a single function, `set_return`, which returns a given value.
 
 # METHODS
 
