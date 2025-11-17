@@ -28,9 +28,9 @@ our $VERSION = '0.03';
 
     use Return::Set qw(set_return);
 
-    return set_return($value);  # Just returns $value
+    return set_return($value);	# Just returns $value
 
-    return set_return($value, { type => 'integer' });  # Validates $value is an integer
+    return set_return($value, { type => 'integer' });	# Validates $value is an integer
 
 =head1 DESCRIPTION
 
@@ -38,7 +38,8 @@ If a validation schema is provided, the value is validated using
 L<Params::Validate::Strict>.
 If validation fails, it croaks.
 
-When used hand-in-hand with L<Params::Get> you should be able to formally specify the input and output sets for a method.
+When used hand-in-hand with L<Params::Get>,
+you should be able to formally specify the input and output sets for a method.
 
 Exports a single function, C<set_return>, which returns a given value.
 
@@ -61,8 +62,7 @@ sub set_return {
 	}
 
 	if(scalar(@_) == 2) {
-		$value = $_[0];
-		$schema = $_[1];
+		($value, $schema) = @_;
 	} else {
 		my $params = Params::Get::get_params('output', \@_);
 		$value = $params->{'value'} // $params->{'output'};
