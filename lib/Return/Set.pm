@@ -71,7 +71,7 @@ sub set_return {
 
 	if(defined($schema)) {
 		eval {
-			validate_strict(args => { 'value' => $value }, schema => { 'value' => $schema });
+			validate_strict(args => { 'output' => $value }, schema => { 'output' => $schema });
 			1;
 		} or do {
 			if(!defined($value)) {
