@@ -36,7 +36,7 @@ is(set_return($code, { type => 'coderef' }), $code, 'Passes CODEREF validation')
 
 note('Test with no arguments');
 throws_ok {
-    set_return();
+	set_return();
 } qr/Usage/, 'Dies with too few arguments';
 
 done_testing();

@@ -43,13 +43,34 @@ you should be able to formally specify the input and output sets for a method.
 
 Exports a single function, C<set_return>, which returns a given value.
 
-=head1	METHODS
+=head1 FUNCTIONS
 
-=head2 set_return($value, $schema)
+=head2 set_return
 
-Returns C<$value>.
-If C<$schema> is provided, it validates the value against it.
+Returns the given value, optionally validating it against a schema.
+
+Three calling forms are accepted:
+
+=over 4
+
+=item set_return($value)
+
+Returns C<$value> immediately with no validation.
+
+=item set_return($value, $schema)
+
+Returns C<$value> after validating it against C<$schema>
+(a L<Params::Validate::Strict> schema hashref, e.g. C<< { type => 'integer' } >>).
 Croaks if validation fails.
+
+=item set_return(\%args)
+
+Named-parameter form.
+C<%args> may contain C<output> (preferred) or C<value> (accepted for backwards
+compatibility) for the return value, and C<schema> for the optional schema.
+Croaks if validation fails.
+
+=back
 
 =cut
 
@@ -65,7 +86,7 @@ sub set_return {
 		($value, $schema) = @_;
 	} else {
 		my $params = Params::Get::get_params('output', \@_);
-		$value = $params->{'value'} // $params->{'output'};
+		$value = $params->{'output'} // $params->{'value'};
 		$schema = $params->{'schema'};
 	}
 
@@ -74,13 +95,14 @@ sub set_return {
 			validate_strict(args => { 'output' => $value }, schema => { 'output' => $schema });
 			1;
 		} or do {
+			my $err = $@;
 			if(!defined($value)) {
-				croak "Validation failed, value is undefined: $@";
+				croak "Validation failed, value is undefined: $err";
 			}
 			if(!ref($value)) {
-				croak "Validation failed, $value is invalid: $@";
+				croak "Validation failed, $value is invalid: $err";
 			}
-			croak "Validation failed: $@";
+			croak "Validation failed: $err";
 		}
 	}
 
@@ -107,21 +129,11 @@ This module is provided as-is without any warranty.
 
 =head1 LICENCE AND COPYRIGHT
 
-Copyright 2025 Nigel Horne.
+Copyright 2025-2026 Nigel Horne.
 
-Usage is subject to licence terms.
-
-The licence terms of this software are as follows:
-
-=over 4
-
-=item * Personal single user, single computer use: GPL2
-
-=item * All other users (including Commercial, Charity, Educational, Government)
-  must apply in writing for a licence for use from Nigel Horne at the
-  above e-mail.
-
-=back
+Usage is subject to the GPL2 licence terms.
+If you use it,
+please let me know.
 
 =cut
 

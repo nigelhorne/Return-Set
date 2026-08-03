@@ -5,7 +5,7 @@ requires 'perl', '5.010';
 requires 'Carp';
 requires 'Exporter';
 requires 'Params::Get', '0.13';
-requires 'Params::Validate::Strict', '0.10';
+requires 'Params::Validate::Strict', '0.37';
 
 on 'configure' => sub {
 	requires 'ExtUtils::MakeMaker', '6.64';

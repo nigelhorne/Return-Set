@@ -24,25 +24,25 @@ is set_return(123, { type => 'integer' }), 123, "Integer validated successfully"
 
 # Validation failure
 throws_ok { set_return('not-an-int', { type => 'integer' }) }
-    qr/Validation failed/,
-    "Validation fails with non-integer input";
+	qr/Validation failed/,
+	"Validation fails with non-integer input";
 
 # Params::Get-style arguments (hashref with output/schema)
 my $val = set_return(
-    { output => 456, schema => { type => 'integer' } }
+	{ output => 456, schema => { type => 'integer' } }
 );
 is $val, 456, "Params::Get style arguments work";
 
 # Params::Get-style with 'value' instead of 'output'
 my $val2 = set_return(
-    { value => "string", schema => { type => 'string' } }
+	{ value => "string", schema => { type => 'string' } }
 );
 is $val2, "string", "Params::Get with 'value' key works";
 
 # No arguments
 throws_ok { set_return() }
-    qr/Usage:.+set_return/,
-    "Dies with usage message if no arguments passed";
+	qr/Usage:.+set_return/,
+	"Dies with usage message if no arguments passed";
 
 # Single non-ref argument
 is set_return("only"), "only", "Single non-ref arg returned as-is";
