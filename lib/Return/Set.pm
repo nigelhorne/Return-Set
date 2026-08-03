@@ -18,11 +18,11 @@ Return::Set - Return a value optionally validated against a strict schema
 
 =head1 VERSION
 
-Version 0.03
+Version 0.04
 
 =cut
 
-our $VERSION = '0.03';
+our $VERSION = '0.04';
 
 =head1 SYNOPSIS
 

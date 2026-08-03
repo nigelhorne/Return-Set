@@ -1,6 +1,6 @@
 Revision history for Return-Set
 
-0.04
+0.04	Mon Aug  3 03:33:19 PM EDT 2026
 	[ Enhancements ]
 	- Better error messages when validation fails
 	- Named-parameter form now prefers C<output> key over C<value> (both still accepted)
