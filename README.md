@@ -10,9 +10,9 @@ Version 0.04
 
     use Return::Set qw(set_return);
 
-    return set_return($value);  # Just returns $value
-
-    return set_return($value, { type => 'integer' });   # Validates $value is an integer
+    return set_return($value);
+    return set_return($value, { type => 'integer' });
+    return set_return({ output => $value, schema => { type => 'integer' } });
 
 # DESCRIPTION
 

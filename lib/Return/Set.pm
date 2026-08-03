@@ -12,6 +12,13 @@ use Params::Validate::Strict 0.37 qw(validate_strict);
 
 our @EXPORT_OK = qw(set_return);
 
+# Named-parameter dispatch keys — defined once to avoid magic strings
+use constant {
+	_OUT    => 'output',
+	_VAL    => 'value',
+	_SCHEMA => 'schema',
+};
+
 =head1 NAME
 
 Return::Set - Return a value optionally validated against a strict schema
@@ -28,9 +35,9 @@ our $VERSION = '0.04';
 
     use Return::Set qw(set_return);
 
-    return set_return($value);	# Just returns $value
-
-    return set_return($value, { type => 'integer' });	# Validates $value is an integer
+    return set_return($value);
+    return set_return($value, { type => 'integer' });
+    return set_return({ output => $value, schema => { type => 'integer' } });
 
 =head1 DESCRIPTION
 
@@ -75,35 +82,44 @@ Croaks if validation fails.
 =cut
 
 sub set_return {
-	my $value;
-	my $schema;
+	# Major premise: callers must supply at least one argument.
+	# Minor premise: @_ is empty.
+	# Conclusion: this is a programming error — croak immediately rather than
+	# deferring to Params::Get's error path.
+	croak 'Usage: set_return($value [, \%schema])' unless @_;
 
-	if((scalar(@_) == 1) && !ref($_[0])) {
-		return $_[0];	 # Simple scalar case with no schema, so no validation is possible
-	}
+	# Major premise: a lone plain scalar cannot carry a schema (no second slot).
+	# Minor premise: exactly one argument, and it is not a reference.
+	# Conclusion: validation is structurally impossible — return without dispatch.
+	return $_[0] if @_ == 1 && !ref $_[0];
 
-	if(scalar(@_) == 2) {
+	my ($value, $schema);
+	if (@_ == 2) {
 		($value, $schema) = @_;
 	} else {
-		my $params = Params::Get::get_params('output', \@_);
-		$value = $params->{'output'} // $params->{'value'};
-		$schema = $params->{'schema'};
+		my $params = Params::Get::get_params(_OUT, \@_);
+		$value  = $params->{_OUT()} // $params->{_VAL()};
+		$schema = $params->{_SCHEMA()};
 	}
 
-	if(defined($schema)) {
+	if (defined $schema) {
 		eval {
-			validate_strict(args => { 'output' => $value }, schema => { 'output' => $schema });
+			validate_strict(
+				args   => { _OUT, $value  },
+				schema => { _OUT, $schema },
+			);
 			1;
 		} or do {
 			my $err = $@;
-			if(!defined($value)) {
-				croak "Validation failed, value is undefined: $err";
-			}
-			if(!ref($value)) {
-				croak "Validation failed, $value is invalid: $err";
-			}
-			croak "Validation failed: $err";
-		}
+			# Partition on ref-ness (exhaustive and non-overlapping):
+			# Premise A: validate_strict treats undef as "not provided" (optional),
+			#   so undef values always pass — this block is never reached for undef.
+			# Premise B: a reference cannot be safely interpolated into a string.
+			# Conclusion B: emit the error without embedding the value.
+			croak "Validation failed: $err" if ref $value;
+			# Conclusion C: a defined plain scalar is safe to interpolate.
+			croak "Validation failed, $value is invalid: $err";
+		};
 	}
 
 	return $value;
