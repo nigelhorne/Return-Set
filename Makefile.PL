@@ -29,7 +29,7 @@ WriteMakefile(
 		'Carp' => 0,
 		'Exporter' => 0,
 		'Params::Get' => 0.13,
-		'Params::Validate::Strict' => 0.10,
+		'Params::Validate::Strict' => 0.37,
 	}, dist => $dist,
 	clean => { FILES => 'Return-Set-*' },
 	# META_ADD => {
