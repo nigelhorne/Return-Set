@@ -1,6 +1,6 @@
 Revision history for Return-Set
 
-0.05
+0.05	Mon Aug  3 09:04:38 PM EDT 2026
 	[ Enhancements ]
 	- Explicit guard clause croaks with Usage message on zero arguments
 	- Dispatch key strings extracted as named constants to eliminate magic strings
